@@ -21,7 +21,7 @@ docker images
 docker build --tag dockerangularsample:0.1 --file Dockerfile . 
 
 #To run the program
-docker run dockerangularsample:0.1
+docker run --publish 4200:4200 dockerangularsample:0.1
 
 #Now open your browser at localhost:4200 to view the site
  
