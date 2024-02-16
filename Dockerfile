@@ -12,21 +12,20 @@ FROM node:${NODE_VERSION}-alpine
 # Use development node environment by default.
 ENV NODE_ENV development
 
-WORKDIR /usr/src/
+RUN npm install -g @angular/cli@${ANGULAR_VERSION}
+RUN ng analytics disable --global true
 
-# Leverage a cache mount to /root/.npm to speed up subsequent builds.
-RUN --mount=type=cache,target=/root/.npm \
-    npx -p @angular/cli@${ANGULAR_VERSION} ng new DockerAngularSample
+RUN file="$(pwd)" && echo $file
 
 WORKDIR /usr/src/DockerAngularSample
+
+RUN ng new DockerAngularSample --directory . --defaults --skip-git
 
 # Copy the rest of the source files into the image.
 COPY . .
 
-# Expose the port that the application listens on.
 EXPOSE 4200
 
 RUN file="$(pwd)" && echo $file
-RUN file="$(ls -l)" && echo $file
-# Run the application.
-CMD npx ng serve --host 0.0.0.0
+# VOLUME . /usr/src/DockerAngularSample
+CMD ng serve --host 0.0.0.0

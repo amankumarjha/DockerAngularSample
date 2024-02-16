@@ -16,23 +16,14 @@ docker run hello-world
 #To list all images
 docker images
 
-#To initialize Dockerfile, run this if no dockerfile is present and you want to create one to write
-docker init
+#To build image first remove all files and folders except 3 files: Dockerfile, readme.txt and .dockerignore and then run below command
 
-#To build image from Dockerfile if not having any error
-docker compose up --build
-#To build with more details
-BUILDKIT_PROGRESS=plain docker compose up --build
-#To see output at any present location first add below line and run as just above line, you can add/remove -l in ls if need to remove from cache
-RUN file="$(pwd)" && echo $file
-RUN file="$(ls -l)" && echo $file
+docker build --tag dockerangularsample:0.1 --file Dockerfile . 
 
-#Now open your browser at localhost:3000 to view the site
+#To run the program
+docker run dockerangularsample:0.1
 
-#To run without building images from Dockerfile
-docker compose up
-#To stop the container
-docker compose down
+#Now open your browser at localhost:4200 to view the site
  
 #To view all stopped container
 docker ps --filter status=exited -q
@@ -41,10 +32,10 @@ docker ps --filter status=exited -q
 docker exec -it <container-name-or-id> bash
 
 #To remove all stopped container
-docker rm $(docker ps --filter status=exited -q)
+# docker rm $(docker ps --filter status=exited -q)
 
 #To remove everything
-docker system prune -a --volumes
+# docker system prune --all --volumes --force
 
 #To stop docker
-systemctl --user stop docker-desktop
+# systemctl --user stop docker-desktop
