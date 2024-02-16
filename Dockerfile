@@ -24,8 +24,11 @@ RUN ng new DockerAngularSample --directory . --defaults --skip-git
 # Copy the rest of the source files into the image.
 COPY . .
 
-# EXPOSE 4200
-
 RUN file="$(pwd)" && echo $file
-# VOLUME . /usr/src/DockerAngularSample
-CMD ng serve --host 0.0.0.0
+RUN file="$(whoami)" && echo $file
+RUN file="$(ls)" && echo $file
+
+# VOLUME /mnt/c/Users/ak958/Documents/DockerAngularSample /usr/src/DockerAngularSample
+# VOLUME /usr/src/DockerAngularSample
+
+# RUN ng serve --host 0.0.0.0

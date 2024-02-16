@@ -18,13 +18,17 @@ docker images
 
 #To build image first remove all files and folders except 3 files: Dockerfile, readme.txt and .dockerignore and then run below command
 
-docker build --tag dockerangularsample:0.1 --file Dockerfile . 
+docker build --progress=plain --tag dockerangularsample:0.1 --file Dockerfile . 
 
 #To run the program
 docker run --publish 4200:4200 dockerangularsample:0.1
 
+docker run --publish 4200:4200 dockerangularsample:0.1 ng serve --host 0.0.0.0
 #Now open your browser at localhost:4200 to view the site
- 
+
+# docker run --volume /mnt/c/Users/ak958/Documents/dockerangularsample:/usr/src/DockerAngularSample --publish 4200:4200 dockerangularsample:0.1
+# docker run --volume $(pwd):/usr/src/DockerAngularSample --publish 4200:4200 dockerangularsample:0.1
+
 #To view all stopped container
 docker ps --filter status=exited -q
 
