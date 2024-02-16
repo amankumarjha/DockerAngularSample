@@ -25,18 +25,12 @@ docker run --volume $(pwd):/usr/src/DockerAngularSample dockerangularsample:0.22
 #To create the project
 docker run --volume $(pwd):/usr/src/DockerAngularSample dockerangularsample:0.22 ng new DockerAngularSample --defaults --skip-git
 
-#To see current working directory
-docker run --volume $(pwd):/usr/src/DockerAngularSample dockerangularsample:0.22 pwd
-
 #To change current working directory
 docker run --volume $(pwd):/usr/src/DockerAngularSample --workdir /usr/src/DockerAngularSample dockerangularsample:0.22 pwd
 
 #To run the project
-docker run --volume $(pwd):/usr/src/DockerAngularSample --workdir /usr/src/DockerAngularSample --publish 4200:4200 dockerangularsample:0.22 ng serve --host 0.0.0.0
+docker run --volume $(pwd):/usr/src/DockerAngularSample --workdir /usr/src/DockerAngularSample --publish 4200:4200 dockerangularsample:0.22 ng serve --host 0.0.0.0 --poll=100
 #Now open your browser at localhost:4200 to view the site
-
-# docker run --volume /mnt/c/Users/ak958/Documents/dockerangularsample:/usr/src/DockerAngularSample --publish 4200:4200 dockerangularsample:0.1
-# docker run --volume $(pwd):/usr/src/DockerAngularSample --publish 4200:4200 dockerangularsample:0.1
 
 #To view all stopped container
 docker ps --filter status=exited -q
