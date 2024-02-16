@@ -16,14 +16,23 @@ docker run hello-world
 #To list all images
 docker images
 
-#To build image first remove all files and folders except 3 files: Dockerfile, readme.txt and .dockerignore and then run below command
+#To build image first remove all files and folders except 3 files; Dockerfile, readme.txt and .dockerignore and then run below command:
+docker build --progress=plain --tag dockerangularsample:0.22 --file Dockerfile . 
 
-docker build --progress=plain --tag dockerangularsample:0.1 --file Dockerfile . 
+#To see current working directory
+docker run --volume $(pwd):/usr/src/DockerAngularSample dockerangularsample:0.22 pwd
 
-#To run the program
-docker run --publish 4200:4200 dockerangularsample:0.1
+#To create the project
+docker run --volume $(pwd):/usr/src/DockerAngularSample dockerangularsample:0.22 ng new DockerAngularSample --defaults --skip-git
 
-docker run --publish 4200:4200 dockerangularsample:0.1 ng serve --host 0.0.0.0
+#To see current working directory
+docker run --volume $(pwd):/usr/src/DockerAngularSample dockerangularsample:0.22 pwd
+
+#To change current working directory
+docker run --volume $(pwd):/usr/src/DockerAngularSample --workdir /usr/src/DockerAngularSample dockerangularsample:0.22 pwd
+
+#To run the project
+docker run --volume $(pwd):/usr/src/DockerAngularSample --workdir /usr/src/DockerAngularSample --publish 4200:4200 dockerangularsample:0.22 ng serve --host 0.0.0.0
 #Now open your browser at localhost:4200 to view the site
 
 # docker run --volume /mnt/c/Users/ak958/Documents/dockerangularsample:/usr/src/DockerAngularSample --publish 4200:4200 dockerangularsample:0.1

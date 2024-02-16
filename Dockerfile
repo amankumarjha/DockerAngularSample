@@ -17,18 +17,7 @@ RUN ng analytics disable --global true
 
 RUN file="$(pwd)" && echo $file
 
-WORKDIR /usr/src/DockerAngularSample
-
-RUN ng new DockerAngularSample --directory . --defaults --skip-git
-
-# Copy the rest of the source files into the image.
-COPY . .
+WORKDIR /usr/src/
 
 RUN file="$(pwd)" && echo $file
 RUN file="$(whoami)" && echo $file
-RUN file="$(ls)" && echo $file
-
-# VOLUME /mnt/c/Users/ak958/Documents/DockerAngularSample /usr/src/DockerAngularSample
-# VOLUME /usr/src/DockerAngularSample
-
-# RUN ng serve --host 0.0.0.0
