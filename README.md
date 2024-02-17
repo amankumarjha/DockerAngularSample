@@ -1,27 +1,53 @@
-# DockerAngularSample
+#To install docker
+sudo apt install docker
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.2.0.
+#To view docker version
+docker -v
 
-## Development server
+#To start docker
+systemctl --user start docker-desktop
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+#To list all running containers
+docker ps
 
-## Code scaffolding
+#Sample hello world from docker
+docker run hello-world
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+#To list all images
+docker images
 
-## Build
+#Replace dockerangularsample & DockerAngularSample with your project name as required. 
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+#To build image first remove all files and folders from current directory except 2 files; Dockerfile and how_to_builld_this_app.txt, then run below command:
+docker build --progress=plain --tag dockerangularsample:0.22 --file Dockerfile . 
 
-## Running unit tests
+#To see current working directory
+docker run --volume $(pwd):/usr/src/DockerAngularSample dockerangularsample:0.22 pwd
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+#To create the project
+docker run --volume $(pwd):/usr/src/DockerAngularSample dockerangularsample:0.22 ng new DockerAngularSample --defaults --skip-git
 
-## Running end-to-end tests
+#To change current working directory
+docker run --volume $(pwd):/usr/src/DockerAngularSample --workdir /usr/src/DockerAngularSample dockerangularsample:0.22 pwd
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+#To add angular material in the project
+docker run --volume $(pwd):/usr/src/DockerAngularSample --workdir /usr/src/DockerAngularSample dockerangularsample:0.22 ng add @angular/material --skip-confirmation
 
-## Further help
+#To run the project
+docker run --volume $(pwd):/usr/src/DockerAngularSample --workdir /usr/src/DockerAngularSample --publish 4200:4200 dockerangularsample:0.22 ng serve --host 0.0.0.0 --poll=100
+#Now open your browser at localhost:4200 to view the site
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+#To view all stopped container
+docker ps --filter status=exited -q
+
+#To open bash inside a container
+docker exec -it <container-name-or-id> bash
+
+#To remove all stopped container
+# docker rm $(docker ps --filter status=exited -q)
+
+#To remove everything
+# docker system prune --all --volumes --force
+
+#To stop docker
+# systemctl --user stop docker-desktop
