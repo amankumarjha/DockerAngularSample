@@ -18,7 +18,7 @@ docker images
 
 #Replace dockerangularsample & DockerAngularSample with your project name as required. 
 
-#To build image first remove all files and folders except 3 files; Dockerfile, readme.txt and .dockerignore and then run below command:
+#To build image first remove all files and folders from current directory except 2 files; Dockerfile and how_to_builld_this_app.txt, then run below command:
 docker build --progress=plain --tag dockerangularsample:0.22 --file Dockerfile . 
 
 #To see current working directory
