@@ -16,6 +16,8 @@ docker run hello-world
 #To list all images
 docker images
 
+#Replace dockerangularsample & DockerAngularSample with your project name as required. 
+
 #To build image first remove all files and folders except 3 files; Dockerfile, readme.txt and .dockerignore and then run below command:
 docker build --progress=plain --tag dockerangularsample:0.22 --file Dockerfile . 
 
@@ -27,6 +29,9 @@ docker run --volume $(pwd):/usr/src/DockerAngularSample dockerangularsample:0.22
 
 #To change current working directory
 docker run --volume $(pwd):/usr/src/DockerAngularSample --workdir /usr/src/DockerAngularSample dockerangularsample:0.22 pwd
+
+#To add angular material in the project
+docker run --volume $(pwd):/usr/src/DockerAngularSample --workdir /usr/src/DockerAngularSample dockerangularsample:0.22 ng add @angular/material --skip-confirmation
 
 #To run the project
 docker run --volume $(pwd):/usr/src/DockerAngularSample --workdir /usr/src/DockerAngularSample --publish 4200:4200 dockerangularsample:0.22 ng serve --host 0.0.0.0 --poll=100
