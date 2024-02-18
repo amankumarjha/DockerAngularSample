@@ -15,9 +15,4 @@ ENV NODE_ENV development
 RUN npm install -g @angular/cli@${ANGULAR_VERSION}
 RUN ng analytics disable --global true
 
-RUN file="$(pwd)" && echo $file
-
 WORKDIR /usr/src/
-
-RUN file="$(pwd)" && echo $file
-RUN file="$(whoami)" && echo $file
