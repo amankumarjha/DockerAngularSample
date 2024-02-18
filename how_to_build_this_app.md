@@ -21,7 +21,7 @@ docker images
 # To build image:
 docker build --progress=plain --tag dockerangularsample:0.1 --file Dockerfile . 
 
-# To create the project: first remove all files and folders from current directory except 2 files; Dockerfile and how_to_builld_this_app.txt, then run below command:
+# To create the project: first remove all files and folders from current directory except 2 files; Dockerfile and how_to_builld_this_app.md, then run below command:
 docker run --volume $(pwd):/usr/src/DockerAngularSample dockerangularsample:0.1 ng new DockerAngularSample --defaults --skip-git
 
 # To add angular material in the project
