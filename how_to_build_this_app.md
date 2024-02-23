@@ -22,11 +22,15 @@ docker images
 docker build --progress=plain --tag dockerangularsample:0.1 --file Dockerfile . 
 
 # To create the project: first remove all files and folders from current directory except 2 files; Dockerfile and how_to_builld_this_app.md, then run below command:
-docker run --volume $(pwd):/usr/src/DockerAngularSample dockerangularsample:0.1 ng new DockerAngularSample --defaults --skip-git
+docker run --volume $(pwd):/usr/src/DockerAngularSample --rm -it --entrypoint /bin/sh  dockerangularsample:0.1
+pwd
+ng new DockerAngularSample --defaults --skip-git
+# To add angular material in the project:
+cd DockerAngularSample
+ng add @angular/material --defaults --skip-confirmation
+exit
 
-# To add angular material in the project
-docker run --volume $(pwd):/usr/src/DockerAngularSample --workdir /usr/src/DockerAngularSample dockerangularsample:0.1 ng add @angular/material --skip-confirmation
-
-# To run the project
-docker run --volume $(pwd):/usr/src/DockerAngularSample --workdir /usr/src/DockerAngularSample --publish 4200:4200 dockerangularsample:0.1 ng serve --host 0.0.0.0 --poll=100
+# To run the project in development:
+docker run --volume $(pwd):/usr/src/DockerAngularSample --workdir /usr/src/DockerAngularSample --publish 4200:4200  --rm -it --entrypoint /bin/sh dockerangularsample:0.1
+ng serve --host 0.0.0.0 --poll 100
 #Now open your browser at localhost:4200 to view the site
