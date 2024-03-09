@@ -11,9 +11,12 @@ ENV NODE_ENV development
 RUN npm install -g @angular/cli@${ANGULAR_VERSION}
 RUN ng analytics disable --global true
 WORKDIR /usr/src/
-RUN ng new DockerAngularSample --defaults --skip-git
-WORKDIR /usr/src/DockerAngularSample
+RUN ng new dockerangularsample --defaults --skip-git
+WORKDIR /usr/src/dockerangularsample
 RUN ng add @angular/material --defaults --skip-confirmation
-COPY src/ .
+COPY package.json .
+RUN npm install
+RUN npm update
+COPY . .
 
 CMD ng serve --host 0.0.0.0 --poll 100
