@@ -14,9 +14,6 @@ WORKDIR /usr/src/
 RUN ng new dockerangularsample --defaults --skip-git
 WORKDIR /usr/src/dockerangularsample
 RUN ng add @angular/material --defaults --skip-confirmation
-COPY package.json .
-RUN npm install
-RUN npm update
-COPY . .
+COPY src/ .
 
 CMD ng serve --host 0.0.0.0 --poll 100

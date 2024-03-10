@@ -4,6 +4,12 @@
 
 docker build --progress=plain --tag dockerangularsample:0.1 --file Dockerfile .
 
+## To prepare the project for first run in new development environment
+
+docker create --name dummy dockerangularsample:0.1
+docker cp dummy:/usr/src/dockerangularsample/. $(pwd)
+docker rm -f dummy
+
 ## To run the project in development
 
 docker run --publish 4200:4200 --volume $(pwd):/usr/src/dockerangularsample --rm dockerangularsample:0.1
